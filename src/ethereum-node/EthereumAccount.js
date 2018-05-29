@@ -8,6 +8,7 @@ class EthereumAccount {
         this._web3 = new Web3(new Web3.providers.HttpProvider(url));
         this._web3.eth.personal.unlockAccount(coinBase, password);
         this._coinBase = coinBase;
+        this._password = password;
     }
 
     get coinBase() {
@@ -25,6 +26,7 @@ class EthereumAccount {
      * @param {string} contractAddress 
      */
     async initContract(contractPath, contractAddress, args = []) {
+        await this.unlockAccount();
         const file = fs.readFileSync(contractPath, 'utf8');
 
         const compiled = solc.compile(file);
@@ -37,14 +39,16 @@ class EthereumAccount {
         let contract;
 
         if (this._web3.utils.isAddress(contractAddress)) {
+
             contract = new this._web3.eth.Contract(abi, contractAddress);
+
         } else {
             contract = new this._web3.eth.Contract(abi);
             const gasCost = await contract.deploy({
                 data: data,
                 arguments: args
             })
-            .estimateGas();
+                .estimateGas();
 
             contract = await contract.deploy({
                 data: data,
@@ -69,6 +73,13 @@ class EthereumAccount {
         const gasPrice = this._web3.utils.fromWei(await this._web3.eth.getGasPrice());
         const ethCost = gasAmount * gasPrice;
         return await this.getBalance() >= ethCost;
+    }
+
+    async unlockAccount(){
+        const accounts = await this._web3.eth.getAccounts();
+        if (accounts.indexOf(this._coinBase) === -1){
+            await this._web3.eth.personal.unlockAccount(this._coinBase, this._password);
+        }
     }
 }
 

@@ -1,9 +1,29 @@
 {
-    "CONTRACT_PATH": "example/counter.sol",
-    "ETHEREUM_URL":"http://localhost:8545/",
-    "CONTRACT_INITIAL_ARGS":[0],
-    "ACCOUNT_ADDRESS":"",
-    "ACCOUNT_PASSWORD":"",
-    "CONTRACT_ADDRESS":"",
-    "ALLOWED_METHODS":["increase","setCount"]
+    "CONTRACT_PATH": "example/contracts/counter.sol",
+    "ETHEREUM_URL": "http://localhost:8545/",
+    "CONTRACT_INITIAL_ARGS": [
+        0
+    ],
+    "ACCOUNT_ADDRESS": "",
+    "ACCOUNT_PASSWORD": "",
+    "CONTRACT_ADDRESS": "",
+    "CREATE_NEW_CONTRACT": false,
+    "ALLOWED_METHODS": [
+        {
+            "name": "increase",
+            "args": []
+        },
+        {
+            "name": "increase",
+            "args": [
+                "amount"
+            ]
+        },
+        {
+            "name": "setCount",
+            "args": [
+                "_count"
+            ]
+        }
+    ]
 }

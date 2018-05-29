@@ -1,4 +1,5 @@
 const TransactionOptions = require('./TransactionOptions');
+const Utils = require('../utils/Utils');
 
 class MessageParams {
     constructor({ method = "", args = {}, options = new TransactionOptions() }) {
@@ -7,15 +8,15 @@ class MessageParams {
         this._options = new TransactionOptions(options);
     }
 
-    get method(){
+    get method() {
         return this._method;
     }
 
-    get args(){
+    get args() {
         return this._args;
     }
 
-    get options(){
+    get options() {
         return this._options;
     }
 
@@ -24,14 +25,23 @@ class MessageParams {
      * 
      * @returns {Array<String>}
      */
-    getArgsArray(jsonInterface){
-        const argsNames = jsonInterface.find(item => item.name === this.method).inputs.map(arg => arg.name);
-        const argsArray = [];
+    getArgsArray(jsonInterface) {
+        const methodArgs = Utils.getArgsNamesArrayFromObject(this.args);
+
+        const argsNames = jsonInterface
+            .find(item => {
+                const itemArgsNames = item.inputs.map(input => input.name);
+                return item.name === this.method && Utils.compareStringArrays(methodArgs, itemArgsNames);
+            })
+            .inputs.map(arg => arg.name);
+
+        const argsValuesArray = [];
 
         argsNames.forEach(argName => {
-            argsArray.push(this.args[argName]);
+            argsValuesArray.push(this.args[argName]);
         });
-        return argsArray;
+
+        return argsValuesArray;
     }
 }
 

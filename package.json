@@ -12,6 +12,7 @@
     "devicehive": "^2.0.3",
     "devicehive-plugin-core": "^1.1.4",
     "devicehive-proxy-message": "^1.0.11",
+    "fast-deep-equal": "^2.0.1",
     "json-evn-configurator": "^1.0.6",
     "solc": "^0.4.24",
     "web3": "^1.0.0-beta.34"

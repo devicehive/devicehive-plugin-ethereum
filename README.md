@@ -5,6 +5,7 @@ This plugin allows you to manipulate your custom smart contract from device.
 
 ## Before the start
 ### Specify your config file:
+#### Plugin config:
 *DEVICE_HIVE_PLUGIN_WS_ENDPOINT* - proxy endpoint to connect <br />
 *DEVICE_HIVE_AUTH_SERVICE_API_URL* - devicehive auth endpoint <br />
 *DEVICE_HIVE_MAIN_SERVICE_API_URL* - devicehive api reest endpoint <br />
@@ -16,12 +17,14 @@ This plugin allows you to manipulate your custom smart contract from device.
 *AUTO_SUBSCRIPTION_ON_START* <br />
 *SUBSCRIPTION_GROUP* <br />
 
+#### Ethereum config:
 *CONTRACT_PATH* - path to your smart contract, <br />
 *ETHEREUM_URL* - url to ethereum node, <br />
 *CONTRACT_INITIAL_ARGS* - arguments for initializing smart contract, <br />
 *ACCOUNT_ADDRESS* - ethereum account address <br />
 *ACCOUNT_PASSWORD* - ethereum account password <br />
 *CONTRACT_ADDRESS* - contract's address, if there is no address then new will be created <br />
+*CREATE_NEW_CONTRACT* - set it to true, if you want to create new contract <br />,
 *ALLOWED_METHODS* - methods, which can be used by device <br />
 
 ## How to start
