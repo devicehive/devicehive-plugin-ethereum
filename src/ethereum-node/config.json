@@ -1,0 +1,9 @@
+{
+    "CONTRACT_PATH": "example/counter.sol",
+    "ETHEREUM_URL":"http://localhost:8545/",
+    "CONTRACT_INITIAL_ARGS":[0],
+    "ACCOUNT_ADDRESS":"",
+    "ACCOUNT_PASSWORD":"",
+    "CONTRACT_ADDRESS":"",
+    "ALLOWED_METHODS":["increase","setCount"]
+}

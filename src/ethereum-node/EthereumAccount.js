@@ -40,14 +40,19 @@ class EthereumAccount {
             contract = new this._web3.eth.Contract(abi, contractAddress);
         } else {
             contract = new this._web3.eth.Contract(abi);
+            const gasCost = await contract.deploy({
+                data: data,
+                arguments: args
+            })
+            .estimateGas();
+
             contract = await contract.deploy({
                 data: data,
                 arguments: args
             })
                 .send({
                     from: this._coinBase,
-                    gas: 1500000,
-                    gasPrice: '300000'
+                    gas: gasCost
                 })
                 .on('error', err => {
                     throw new Error(err)

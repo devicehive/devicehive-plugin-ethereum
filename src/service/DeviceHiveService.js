@@ -3,7 +3,7 @@ const PluginParams = require('../entities/PluginParams');
 const PluginListQuery = DeviceHive.models.query.PluginListQuery;
 const PluginUpdateQuery = DeviceHive.models.query.PluginUpdateQuery;
 
-class PluginService {
+class DeviceHiveService {
     constructor(config) {
         this._httpDeviceHive = new DeviceHive({
             login: config.USER_LOGIN,
@@ -52,4 +52,4 @@ class PluginService {
     }
 }
 
-module.exports = PluginService;
+module.exports = DeviceHiveService;

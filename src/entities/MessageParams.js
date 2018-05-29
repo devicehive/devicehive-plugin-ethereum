@@ -25,7 +25,6 @@ class MessageParams {
      * @returns {Array<String>}
      */
     getArgsArray(jsonInterface){
-        //TODO: save result
         const argsNames = jsonInterface.find(item => item.name === this.method).inputs.map(arg => arg.name);
         const argsArray = [];
 
