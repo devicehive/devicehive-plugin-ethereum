@@ -17,10 +17,6 @@ contract CounterContract {
         count += amount;
     }
 
-    function increaseA(int64 amount) public {
-        count += amount;
-    }
-
     function getCount() public view returns( int64 ) {
         return count;
     }

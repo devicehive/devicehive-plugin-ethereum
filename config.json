@@ -11,5 +11,12 @@
     "PLUGIN_ACCESS_TOKEN": "",
     "PLUGIN_REFRESH_TOKEN": "",
     "AUTO_SUBSCRIPTION_ON_START": true,
-    "SUBSCRIPTION_GROUP": ""
+    "SUBSCRIPTION_GROUP": "",
+
+    "FILTERS":{
+        "notifications": true,
+        "commands": false,
+        "command_updates": false,
+        "names": "blockchain-record"
+    }
 }

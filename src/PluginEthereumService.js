@@ -2,7 +2,7 @@ const { DeviceHivePlugin } = require(`devicehive-plugin-core`);
 const { MessageBuilder, MessageUtils } = require(`devicehive-proxy-message`);
 const PluginEthereumUtils = require('./utils/PluginEthereumUtils')
 
-const MessageParams = require('./entities/MessageParams');
+const MessageParams = require('./entities/message/MessageParams');
 
 
 /**
@@ -59,15 +59,10 @@ class PluginService extends DeviceHivePlugin {
 
                     if (messageBody.notification) {
 
-                        const msgParams = new MessageParams(messageBody.notification.parameters);
-
-                        if (PluginEthereumUtils.checkMethodIsAllowed(msgParams)) {
-                            this._contract.sendTransaction(msgParams);
-                        } else {
-                            console.log('This method is forbidden');
-                        }
+                        this.callContractMethod(messageBody.notification.parameters);
 
                     } else if (messageBody.command) {
+                        this.callContractMethod(messageBody.command.parameters);
                         if (messageBody.command.isUpdated) {
                             console.log(`NEW COMMAND UPDATE TYPE MESSAGE. Command: ${JSON.stringify(messageBody.command)}`);
                         } else {
@@ -85,6 +80,16 @@ class PluginService extends DeviceHivePlugin {
                 console.log(`UNKNOWN MESSAGE TYPE`);
                 console.log(message);
                 break;
+        }
+    }
+
+    callContractMethod(params){
+        const msgParams = new MessageParams(params);
+
+        if (PluginEthereumUtils.checkMethodIsAllowed(msgParams)) {
+            this._contract.sendTransaction(msgParams);
+        } else {
+            throw new Error('Method is forbidden');
         }
     }
 

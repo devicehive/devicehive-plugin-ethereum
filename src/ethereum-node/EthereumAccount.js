@@ -6,9 +6,9 @@ class EthereumAccount {
 
     constructor(url, coinBase, password) {
         this._web3 = new Web3(new Web3.providers.HttpProvider(url));
-        this._web3.eth.personal.unlockAccount(coinBase, password);
         this._coinBase = coinBase;
         this._password = password;
+        this.unlockAccount();
     }
 
     get coinBase() {
@@ -76,10 +76,7 @@ class EthereumAccount {
     }
 
     async unlockAccount(){
-        const accounts = await this._web3.eth.getAccounts();
-        if (accounts.indexOf(this._coinBase) === -1){
-            await this._web3.eth.personal.unlockAccount(this._coinBase, this._password);
-        }
+        await this._web3.eth.personal.unlockAccount(this._coinBase, this._password);
     }
 }
 

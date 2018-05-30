@@ -4,6 +4,9 @@
 This plugin allows you to manipulate your custom smart contract from device.
 
 ## Before the start
+
+###Ethereum problems - if do not know look the link
+
 ### Specify your config file:
 #### Plugin config:
 *DEVICE_HIVE_PLUGIN_WS_ENDPOINT* - proxy endpoint to connect <br />
@@ -30,3 +33,7 @@ This plugin allows you to manipulate your custom smart contract from device.
 ## How to start
 1. npm i
 2. npm start
+
+
+
+*Note* - docs for ethereum.

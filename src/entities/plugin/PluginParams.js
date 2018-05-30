@@ -1,14 +1,15 @@
 const deepEqual = require('fast-deep-equal');
 
 class PluginParams {
+
     constructor({
         nodeUrl = "",
         contractAddress = "",
         allowedMethods = []
-    }) {
+    } = {}) {
         this.nodeUrl = nodeUrl;
-        this.contractAddress = contractAddress
-        this.allowedMethods = allowedMethods
+        this.contractAddress = contractAddress;
+        this.allowedMethods = allowedMethods;
     }
 
     setContractAddress(address) {

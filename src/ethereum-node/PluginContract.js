@@ -33,7 +33,7 @@ class PluginContract {
 
         params.options.setSender(this._account.coinBase);
 
-        this._account.unlockAccount();
+        await this._account.unlockAccount();
 
         if (this._contract.methods[params.method](...args)._method.constant) {
             return await this._contract.methods[params.method](...args).call({from: params.options.from});

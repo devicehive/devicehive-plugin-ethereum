@@ -1,5 +1,6 @@
 const DeviceHive = require('devicehive');
-const PluginParams = require('../entities/PluginParams');
+const PluginEntity = require('../entities/plugin/PluginEntity');
+const PluginParams = require('../entities/plugin/PluginParams');
 const PluginListQuery = DeviceHive.models.query.PluginListQuery;
 const PluginUpdateQuery = DeviceHive.models.query.PluginUpdateQuery;
 
@@ -25,7 +26,8 @@ class DeviceHiveService {
     async getPluginByTopic(topic) {
         const query = new PluginListQuery({ topicName: topic });
         const pluginList = await this._httpDeviceHive.plugin.list(query);
-        return pluginList[0];
+        const plugin = new PluginEntity(pluginList[0]);
+        return plugin;
     }
 
     /**
@@ -49,6 +51,11 @@ class DeviceHiveService {
         const query = new PluginUpdateQuery({ topicName: topic, parameters: jsonParameters });
         await this._httpDeviceHive.plugin.update(query);
         return parameters;
+    }
+
+    async updatePlugin(pluginEntity){
+        await this._httpDeviceHive.plugin.update(pluginEntity.getPluginUpdateQueryObject());
+        return pluginEntity;
     }
 }
 

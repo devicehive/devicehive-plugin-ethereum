@@ -1,5 +1,5 @@
 const TransactionOptions = require('./TransactionOptions');
-const Utils = require('../utils/Utils');
+const Utils = require('../../utils/Utils');
 
 class MessageParams {
     constructor({ method = "", args = {}, options = new TransactionOptions() }) {
