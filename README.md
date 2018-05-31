@@ -12,6 +12,10 @@ With this [guide](#Ethereum.docs) you can run ethereum node locally.
 
 Firstly you should specify [ethereum configuration](#Ethereum.config).
 Add ethereum url, account's address and account's password to config file *(path - ./src/ethereum-node/config.json)*. 
+<br/>
+*Note* - you can use example to see how it works, just fill account and password fields.
+
+<br/>
 Then add contract's path and methods, which could be used by device.
 
 You can also specify contract's address if you have it. If it is not written, then new contract will be created for the first start.
@@ -19,11 +23,9 @@ The contract's address will be stored in plugin parameters.
 
 *Note* - you can create new contract instance. Just set `CREATE_NEW_CONTRACT=true` and do not forget to set initial arguments for deployment.
 
-*Note* - you can use example to see how it works, just fill account and password fields.
-
 ## Specify plugin configuration
 
-Add devicehive's url according to [plugin configuration](#Plugin.config). 
+Add devicehive's urls and plugin topic according to [plugin configuration](#Plugin.config). 
 Add access token.
 You can also specify filters for plugin.
 
@@ -62,14 +64,14 @@ Example:
 
 You can find configuration in `./src/ethereum-node/config.json`
 
-* **_ CONTRACT_PATH _** - path to your smart contract, <br />
-* **_ ETHEREUM_URL _** - url to ethereum node, <br />
-* **_ CONTRACT_INITIAL_ARGS _** - arguments for initializing smart contract, <br />
-* **_ ACCOUNT_ADDRESS _** - ethereum account address <br />
-* **_ ACCOUNT_PASSWORD _** - ethereum account password <br />
-* **_ CONTRACT_ADDRESS _** - contract's address <br />
-* **_ CREATE_NEW_CONTRACT _** - set it to true, if you want to create new contract <br />,
-* **_ ALLOWED_METHODS _** - methods, which can be used by device <br />
+* **_CONTRACT_PATH_** - path to your smart contract, <br />
+* **_ETHEREUM_URL_** - url to ethereum node, <br />
+* **_CONTRACT_INITIAL_ARGS_** - arguments for initializing smart contract, <br />
+* **_ACCOUNT_ADDRESS_** - ethereum account address <br />
+* **_ACCOUNT_PASSWORD_** - ethereum account password <br />
+* **_CONTRACT_ADDRESS_** - contract's address <br />
+* **_CREATE_NEW_CONTRACT_** - set it to true, if you want to create new contract <br />
+* **_ALLOWED_METHODS_** - methods, which can be used by device <br />
 
 
 <a name="Message.model"></a>
@@ -88,8 +90,7 @@ You can find configuration in `./src/ethereum-node/config.json`
             "value"" // optional
         }
     }
-*Note*: if you won't specify gas or gasPrice then plugin will use min amount of gas for transaction.
-
+*Note*: if gas or gasPrice are not specified then plugin will use min amount of gas for transaction.
 
 <a name="Ethereum.docs"></a>
 
