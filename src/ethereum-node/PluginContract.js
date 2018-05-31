@@ -1,6 +1,8 @@
 const Web3 = require('web3');
 
 const GasLimiter = require('./GasLimiter');
+
+const PluginParams = require('../entities/plugin/PluginParams');
 class PluginContract {
 
     constructor(account) {
@@ -18,9 +20,13 @@ class PluginContract {
      * @param {string} contractPath 
      * @param {string} contractAddress 
      */
-    async init(contractPath, contractAddress = null, args = []) {
-        this._contract = await this._account.initContract(contractPath, contractAddress, args);
+    async init(contractPath, params = new PluginParams(), args = []) {
+        this._contract = await this._account.initContract(contractPath, params, args);
         this.INITIALIZED = true;
+    }
+
+    getInitialTransactionHash(){
+        return this._contract.initialTransactionHash;
     }
     /**
      * 

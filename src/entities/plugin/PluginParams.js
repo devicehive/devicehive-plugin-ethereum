@@ -3,13 +3,19 @@ const deepEqual = require('fast-deep-equal');
 class PluginParams {
 
     constructor({
-        nodeUrl = "",
-        contractAddress = "",
-        allowedMethods = []
+        nodeUrl = '',
+        contractAddress = '',
+        allowedMethods = [],
+        initialTransactionHash = ''
     } = {}) {
         this.nodeUrl = nodeUrl;
         this.contractAddress = contractAddress;
         this.allowedMethods = allowedMethods;
+        this.initialTransactionHash = initialTransactionHash;
+    }
+
+    setInitialTransactionHash(hash){
+        this.initialTransactionHash = hash;
     }
 
     setContractAddress(address) {

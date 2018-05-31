@@ -25,9 +25,9 @@ class EthereumAccount {
     /**
      * 
      * @param {string} contractPath 
-     * @param {string} contractAddress 
+     * @param {PluginParams} contractAddress 
      */
-    async initContract(contractPath, contractAddress, args = []) {
+    async initContract(contractPath, params, args = []) {
         await this.unlockAccount();
         const file = fs.readFileSync(contractPath, 'utf8');
 
@@ -40,36 +40,46 @@ class EthereumAccount {
 
         let contract;
 
-        if (this._web3.utils.isAddress(contractAddress)) {
+        if (this._web3.utils.isAddress(params.contractAddress)) {
 
-            contract = new this._web3.eth.Contract(abi, contractAddress);
+            const initTransaction = await this._web3.eth.getTransaction(params.initialTransactionHash);
+            if (initTransaction.input.indexOf(data) !== -1) {
+                contract = new this._web3.eth.Contract(abi, params.contractAddress);
+                return contract;
+            }
 
-        } else {
-            contract = new this._web3.eth.Contract(abi);
-            const gasCost = await contract.deploy({
+        }
+        contract = new this._web3.eth.Contract(abi);
+
+        const gasCost = await contract.deploy({
+            data: data,
+            arguments: args
+        })
+            .estimateGas();
+
+        const payable = this.checkPayablePossibility(gasCost);
+
+        let initialTransactionHash;
+
+        if (payable && GasLimiter.pay(gasCost)) {
+            contract = await contract.deploy({
                 data: data,
                 arguments: args
             })
-                .estimateGas();
-
-            const payable = this.checkPayablePossibility(gasCost);
-
-            if (payable && GasLimiter.pay(gasCost)) {
-                contract = await contract.deploy({
-                    data: data,
-                    arguments: args
+                .send({
+                    from: this._coinBase,
+                    gas: gasCost
                 })
-                    .send({
-                        from: this._coinBase,
-                        gas: gasCost
-                    })
-                    .on('error', err => {
-                        throw new Error(err)
-                    });
-            } else {
-                throw new Error('Not enough ethereum to deploy contract');
-            }
+                .on('error', err => {
+                    throw new Error(err)
+                })
+                .on('transactionHash', transactionHash => {
+                    initialTransactionHash = transactionHash;
+                });
+            contract.initialTransactionHash = initialTransactionHash;
 
+        } else {
+            throw new Error('Not enough ethereum to deploy contract');
         }
         return contract;
     }

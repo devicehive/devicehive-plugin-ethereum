@@ -36,10 +36,11 @@ deviceHiveService.init().then(() => {
     const account = new EthereumAccount(params.nodeUrl, ethereumConfig.ACCOUNT_ADDRESS, ethereumConfig.ACCOUNT_PASSWORD);
     const contract = new PluginContract(account);
 
-    contract.init(ethereumConfig.CONTRACT_PATH, params.contractAddress, ethereumConfig.CONTRACT_INITIAL_ARGS).then(() => {
+    contract.init(ethereumConfig.CONTRACT_PATH, params, ethereumConfig.CONTRACT_INITIAL_ARGS).then(() => {
         if (contract.address !== params.contractAddress) {
             console.log(`New contract has been created. Address: ${contract.address}`);
             params.setContractAddress(contract.address);
+            params.setInitialTransactionHash(contract.getInitialTransactionHash());
             deviceHiveService.updatePluginParameters(plugin.topicName, params);
         }
         const pluginEthereumService = new PluginEthereumService(contract);
