@@ -2,6 +2,8 @@ const Web3 = require('web3');
 const fs = require('fs');
 const solc = require('solc');
 
+const GasLimiter = require('./GasLimiter');
+
 class EthereumAccount {
 
     constructor(url, coinBase, password) {
@@ -50,17 +52,24 @@ class EthereumAccount {
             })
                 .estimateGas();
 
-            contract = await contract.deploy({
-                data: data,
-                arguments: args
-            })
-                .send({
-                    from: this._coinBase,
-                    gas: gasCost
+            const payable = this.checkPayablePossibility(gasCost);
+
+            if (payable && GasLimiter.pay(gasCost)) {
+                contract = await contract.deploy({
+                    data: data,
+                    arguments: args
                 })
-                .on('error', err => {
-                    throw new Error(err)
-                });
+                    .send({
+                        from: this._coinBase,
+                        gas: gasCost
+                    })
+                    .on('error', err => {
+                        throw new Error(err)
+                    });
+            } else {
+                throw new Error('Not enough ethereum to deploy contract');
+            }
+
         }
         return contract;
     }
@@ -75,7 +84,7 @@ class EthereumAccount {
         return await this.getBalance() >= ethCost;
     }
 
-    async unlockAccount(){
+    async unlockAccount() {
         await this._web3.eth.personal.unlockAccount(this._coinBase, this._password);
     }
 }

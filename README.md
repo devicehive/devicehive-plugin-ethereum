@@ -12,6 +12,7 @@ With this [guide](#Ethereum.docs) you can run ethereum node locally.
 
 Firstly you should specify [ethereum configuration](#Ethereum.config).
 Add ethereum url, account's address and account's password to config file *(path - ./src/ethereum-node/config.json)*. 
+Do not forget to specify gas limit and time period update.
 <br/>
 *Note* - you can use example to see how it works, just fill account and password fields.
 
@@ -69,6 +70,8 @@ You can find configuration in `./src/ethereum-node/config.json`
 * **_CONTRACT_INITIAL_ARGS_** - arguments for initializing smart contract, <br />
 * **_ACCOUNT_ADDRESS_** - ethereum account address <br />
 * **_ACCOUNT_PASSWORD_** - ethereum account password <br />
+* **_GAS_LIMIT_** - maximum gas limit which can be used by device <br />
+* **_TIME_PERIOD_** - time period in minutes, every `TIME_PERIOD` minutes gas limit will be updated <br />
 * **_CONTRACT_ADDRESS_** - contract's address <br />
 * **_CREATE_NEW_CONTRACT_** - set it to true, if you want to create new contract <br />
 * **_ALLOWED_METHODS_** - methods, which can be used by device <br />
@@ -103,5 +106,5 @@ To start ethereum locally:
 1. Download and install `geth`.
 2. Open terminal and run `geth --mine --minerthreads=1 --networkid=1999 --rpc --rpcaddr "127.0.0.1"  --rpcapi="admin,debug,miner,shh,txpool,personal,eth,net,web3" --dev`.
 3. Open another terminal window and run `geth attach http://localhost:8545`.
-4. In second window run `personal.newAccout()` and enter your password. You will get account's address.
+4. In second window run `personal.newAccount()` and enter your password. You will get account's address.
 5. Make sure you have enough ethereum. You can run `eth.accounts.forEach(function(account){if(account!==eth.coinbase){eth.sendTransaction({from:eth.coinbase,to:account,value:web3.toWei(1000000)})}})` to increase it on your account.

@@ -6,6 +6,8 @@
     ],
     "ACCOUNT_ADDRESS": "",
     "ACCOUNT_PASSWORD": "",
+    "GAS_LIMIT": 40000,
+    "TIME_PERIOD": 60,
     "CONTRACT_ADDRESS": "",
     "CREATE_NEW_CONTRACT": false,
     "ALLOWED_METHODS": [

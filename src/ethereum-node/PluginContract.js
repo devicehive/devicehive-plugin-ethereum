@@ -1,5 +1,6 @@
 const Web3 = require('web3');
 
+const GasLimiter = require('./GasLimiter');
 class PluginContract {
 
     constructor(account) {
@@ -47,12 +48,12 @@ class PluginContract {
                 throw new Error('gasPrice or gas is too Low')
             }
 
-            const payabale = await this._account.checkPayablePossibility(gasCost);
+            const payabale = await this._account.checkPayablePossibility(params.options.gas);
 
-            if (payabale) {
+            if (payabale && GasLimiter.pay(params.options.gas)) {
                 return await this._contract.methods[params.method](...args).send(params.options);
             } else {
-                throw new Error('Not enough eth')
+                throw new Error('Not enough ethereum or exceeds gas limit');
             }
         }
 
