@@ -26,8 +26,7 @@ class DeviceHiveService {
     async getPluginByTopic(topic) {
         const query = new PluginListQuery({ topicName: topic });
         const pluginList = await this._httpDeviceHive.plugin.list(query);
-        const plugin = new PluginEntity(pluginList[0]);
-        return plugin;
+        return new PluginEntity(pluginList[0]);
     }
 
     /**
@@ -37,8 +36,7 @@ class DeviceHiveService {
     async getPluginParameters(topic){
         const query = new PluginListQuery({ topicName: topic });
         const pluginList = await this._httpDeviceHive.plugin.list(query);
-        const params = new PluginParams(pluginList[0].parameters)
-        return params;
+        return new PluginParams(pluginList[0].parameters);
     }
 
     /**
@@ -53,6 +51,11 @@ class DeviceHiveService {
         return parameters;
     }
 
+    /**
+     * @param {PluginEntity} pluginEntity
+     * 
+     * @returns {PluginEntity}
+     */
     async updatePlugin(pluginEntity){
         await this._httpDeviceHive.plugin.update(pluginEntity.getPluginUpdateQueryObject());
         return pluginEntity;

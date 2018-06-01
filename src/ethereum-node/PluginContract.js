@@ -8,7 +8,6 @@ class PluginContract {
     constructor(account) {
         this._account = account;
         this._contract = null;
-        this.INITIALIZED = false;
     }
 
     get address(){
@@ -18,21 +17,20 @@ class PluginContract {
     /**
      * 
      * @param {string} contractPath 
-     * @param {string} contractAddress 
+     * @param {PluginParams} params
+     * @param {Array<Any>} args
      */
     async init(contractPath, params = new PluginParams(), args = []) {
         this._contract = await this._account.initContract(contractPath, params, args);
-        this.INITIALIZED = true;
     }
 
     getInitialTransactionHash(){
         return this._contract.initialTransactionHash;
     }
+
     /**
      * 
-     * @param {string} method 
-     * @param {Object} args 
-     * @param {Object} options 
+     * @param {MessageParams} params 
      */
     async sendTransaction(params) {
 

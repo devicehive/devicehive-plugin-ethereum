@@ -34,7 +34,7 @@ You can also specify filters for plugin.
 # How it works
 
 1. Start devicehive
-2. Create plugin and specify plugin [plugin configuration](#Plugin.config) file
+2. Create plugin and specify [plugin configuration](#Plugin.config) file
 3. Create smart contract and specify [ethereum configuration](#Ethereum.config) file
 4. Run `npm i`
 5. Run `npm start`

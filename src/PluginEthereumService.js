@@ -87,7 +87,7 @@ class PluginService extends DeviceHivePlugin {
         const msgParams = new MessageParams(params);
 
         if (PluginEthereumUtils.checkMethodIsAllowed(msgParams)) {
-            this._contract.sendTransaction(msgParams);
+            this._contract.sendTransaction(msgParams).catch(err => { throw new Error(err); });
         } else {
             throw new Error('Method is forbidden');
         }

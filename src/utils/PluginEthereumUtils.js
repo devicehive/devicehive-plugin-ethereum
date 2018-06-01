@@ -5,7 +5,7 @@ class PluginEthereumUtils {
     /**
      * 
      * @param {MessageParams} params 
-     * @returns {boolean}
+     * @returns {Boolean}
      */
     static checkMethodIsAllowed(params) {
         const msgArgs = Utils.getArgsNamesArrayFromObject(params.args);

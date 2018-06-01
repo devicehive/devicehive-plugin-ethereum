@@ -8,12 +8,12 @@ class Utils {
     static compareStringArrays(a,b){
         if (a === b) return true;
         if (a == null || b == null) return false;
-        if (a.length != b.length) return false;
+        if (a.length !== b.length) return false;
       
         a.sort((x1,x2) => x1.localeCompare(x2));
         b.sort((x1,x2) => x1.localeCompare(x2));
       
-        for (var i = 0; i < a.length; ++i) {
+        for (let i = 0; i < a.length; ++i) {
           if (a[i] !== b[i]) return false;
         }
         return true;

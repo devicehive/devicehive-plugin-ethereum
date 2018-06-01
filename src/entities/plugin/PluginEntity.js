@@ -13,7 +13,7 @@ class PluginEntity {
         }
     }
 
-    constructor({ topicName = '', status = PluginEntity.STATUSES.DISABLED, filter = '////', parameters = new PluginParams() }) {
+    constructor({ topicName = '', status = PluginEntity.STATUSES.DISABLED, filter = '////', parameters = {} }) {
         this.topicName = topicName;
         this.status = status;
         this.parameters = new PluginParams(parameters);
@@ -30,7 +30,7 @@ class PluginEntity {
     }
 
     getPluginUpdateQueryObject(){
-        const queryObj = {
+        return new PluginUpdateQuery({
             topicName: this.topicName,
             names: this.filter.names,
             status: this.status,
@@ -38,8 +38,7 @@ class PluginEntity {
             returnCommands: this.filter.commands,
             returnUpdatedCommands: this.filter.command_updates,
             returnNotifications: this.filter.notifications
-        };
-        return new PluginUpdateQuery(queryObj);
+        });
     }
 }
 

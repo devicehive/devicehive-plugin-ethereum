@@ -22,6 +22,13 @@ class PluginParams {
         this.contractAddress = address;
     }
 
+
+    /**
+     * 
+     * @param {Object} config - ethereum config
+     * 
+     * @returns {Boolean}
+     */
     updateToConfig(config) {
         if (config.ETHEREUM_URL && config.ALLOWED_METHODS) {
 

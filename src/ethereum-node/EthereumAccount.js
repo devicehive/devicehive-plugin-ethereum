@@ -10,7 +10,6 @@ class EthereumAccount {
         this._web3 = new Web3(new Web3.providers.HttpProvider(url));
         this._coinBase = coinBase;
         this._password = password;
-        this.unlockAccount();
     }
 
     get coinBase() {
@@ -43,7 +42,7 @@ class EthereumAccount {
         if (this._web3.utils.isAddress(params.contractAddress)) {
 
             const initTransaction = await this._web3.eth.getTransaction(params.initialTransactionHash);
-            if (initTransaction.input.indexOf(data) !== -1) {
+            if (initTransaction && initTransaction.input.indexOf(data) !== -1) {
                 contract = new this._web3.eth.Contract(abi, params.contractAddress);
                 return contract;
             }
@@ -59,25 +58,8 @@ class EthereumAccount {
 
         const payable = this.checkPayablePossibility(gasCost);
 
-        let initialTransactionHash;
-
         if (payable && GasLimiter.pay(gasCost)) {
-            contract = await contract.deploy({
-                data: data,
-                arguments: args
-            })
-                .send({
-                    from: this._coinBase,
-                    gas: gasCost
-                })
-                .on('error', err => {
-                    throw new Error(err)
-                })
-                .on('transactionHash', transactionHash => {
-                    initialTransactionHash = transactionHash;
-                });
-            contract.initialTransactionHash = initialTransactionHash;
-
+            contract = await this.deployContract(contract,data,args,gasCost);
         } else {
             throw new Error('Not enough ethereum to deploy contract');
         }
@@ -86,7 +68,30 @@ class EthereumAccount {
 
     /**
      * 
+     * @param {Object} contract 
+     * @param {String} data 
+     * @param {Array<Any>} args 
+     * @param {Number} gasCost 
+     */
+    deployContract(contract, data, args, gasCost) {
+        return new Promise((resolve, reject) => {
+            const contractPromise = contract.deploy({data: data, arguments: args})
+                .send({ from: this._coinBase, gas: gasCost })
+                .on('error', err => { throw new Error(err) })
+                .on('transactionHash', transactionHash => {
+                    contractPromise.then((newContractInstance) => {
+                        newContractInstance.initialTransactionHash = transactionHash;
+                        resolve(newContractInstance);
+                    }).catch(reject);
+                }).catch(reject);
+        });
+    }
+
+    /**
+     * 
      * @param {number} gasAmount 
+     * 
+     * @returns {Boolean}
      */
     async checkPayablePossibility(gasAmount) {
         const gasPrice = this._web3.utils.fromWei(await this._web3.eth.getGasPrice());

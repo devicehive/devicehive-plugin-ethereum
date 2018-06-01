@@ -28,7 +28,7 @@ class TransactionOptions {
     }
 
     /**
-    * @param {Number|String} value - value
+    * @param {Any} value - value
     */
     setValue(value) {
         this.value = value;

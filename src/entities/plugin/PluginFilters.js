@@ -36,6 +36,13 @@ class PluginFilters {
 
         this.names = filterArray[4];
     }
+    /**
+     * @param {Object} config - config object
+     * @param {Boolean} config.notifications - notifications' filter
+     * @param {Boolean} config.commands - commands' filter
+     * @param {Boolean} config.command_updates - command_updates' filter
+     * @param {String} config.names - names' filter
+     */
 
     setFiltersFromConfig({ notifications, commands, command_updates, names }) {
         this.notifications = notifications;
