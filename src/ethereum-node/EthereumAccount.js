@@ -77,7 +77,7 @@ class EthereumAccount {
         return new Promise((resolve, reject) => {
             const contractPromise = contract.deploy({data: data, arguments: args})
                 .send({ from: this._coinBase, gas: gasCost })
-                .on('error', err => { throw new Error(err) })
+                .on('error', err => reject(err))
                 .on('transactionHash', transactionHash => {
                     contractPromise.then((newContractInstance) => {
                         newContractInstance.initialTransactionHash = transactionHash;

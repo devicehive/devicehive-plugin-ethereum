@@ -1,7 +1,6 @@
 const Web3 = require('web3');
 
 const GasLimiter = require('./GasLimiter');
-
 const PluginParams = require('../entities/plugin/PluginParams');
 class PluginContract {
 
@@ -49,7 +48,7 @@ class PluginContract {
             if (!params.options.gas) {
                 params.options.setGas(gasCost);
             } else if (params.options.gas && params.options.gas < gasCost){
-                throw new Error('gasPrice or gas is too Low')
+                throw new Error('gasPrice or gas is too low');
             }
 
             const payabale = await this._account.checkPayablePossibility(params.options.gas);

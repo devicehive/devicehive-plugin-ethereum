@@ -18,5 +18,9 @@
         "commands": false,
         "command_updates": false,
         "names": "blockchain-record"
+    },
+    "LOGGER":{
+        "level": 0,
+        "filePath":"./dhe-log.txt"
     }
 }

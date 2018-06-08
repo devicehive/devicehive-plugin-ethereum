@@ -1,5 +1,6 @@
 const { DeviceHivePlugin } = require(`devicehive-plugin-core`);
 
+const log = require('./src/utils/Logger');
 const pluginConfig = require('./config/index');
 const ethereumConfig = require('./src/ethereum-node/config.json');
 const EthereumAccount = require('./src/ethereum-node/EthereumAccount');
@@ -38,12 +39,13 @@ deviceHiveService.init().then(() => {
 
     contract.init(ethereumConfig.CONTRACT_PATH, params, ethereumConfig.CONTRACT_INITIAL_ARGS).then(() => {
         if (contract.address !== params.contractAddress) {
-            console.log(`New contract has been created. Address: ${contract.address}`);
+            log.info(`New contract has been created. Address: ${contract.address}`);
             params.setContractAddress(contract.address);
             params.setInitialTransactionHash(contract.getInitialTransactionHash());
             deviceHiveService.updatePluginParameters(plugin.topicName, params);
         }
         const pluginEthereumService = new PluginEthereumService(contract);
         DeviceHivePlugin.start(pluginEthereumService, pluginConfig);
-    });
-});
+    })
+        .catch(err => log.error(err));
+}).catch(err => log.error(err));

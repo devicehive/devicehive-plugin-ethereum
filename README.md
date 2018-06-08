@@ -12,34 +12,21 @@ With this [guide](#Ethereum.docs) you can run ethereum node locally.
 
 Firstly you should specify [ethereum configuration](#Ethereum.config).
 Add ethereum url, account's address and account's password to config file *(path - ./src/ethereum-node/config.json)*. 
-Do not forget to specify gas limit and time period update.
 <br/>
-*Note* - you can use example to see how it works, just fill account and password fields.
-
-<br/>
-Then add contract's path and methods, which could be used by device.
-
-You can also specify contract's address if you have it. If it is not written, then new contract will be created for the first start.
-The contract's address will be stored in plugin parameters. 
-
-*Note* - you can create new contract instance. Just set `CREATE_NEW_CONTRACT=true` and do not forget to set initial arguments for deployment.
+*Note* - you can use example to see how it works, just do not change other fields.
 
 ## Specify plugin configuration
+In [plugin configuration](#Plugin.config) there are already [playground](https://playground.devicehive.com) urls, however you can run [devicehive](https://github.com/devicehive/devicehive-docker) locally and write your own.
+Add plugin topic and access token. Also add user and password for [devicehive admin panel](https://github.com/devicehive/devicehive-admin-panel).
 
-Add devicehive's urls and plugin topic according to [plugin configuration](#Plugin.config). 
-Add access token.
-You can also specify filters for plugin.
+# Simple start
 
-
-# How it works
-
-1. Start devicehive
-2. Create plugin and specify [plugin configuration](#Plugin.config) file
-3. Create smart contract and specify [ethereum configuration](#Ethereum.config) file
-4. Run `npm i`
-5. Run `npm start`
-6. Send [message](#Message.model) from device
-7. Wait for plugin receives the message and sends transaction to blockchain
+1. Create plugin (locally or on playground) and specify [plugin configuration](#Plugin.config) file
+2. Create smart contract and specify [ethereum configuration](#Ethereum.config) file
+3. Run `npm i`
+4. Run `npm start`
+5. Send [message](#Message.model) from device. See example [here](#Message.example).
+6. Wait for plugin receives the message and sends transaction to blockchain. Logger will notify you about results.
 
 # Configuration
 
@@ -49,14 +36,20 @@ You can also specify filters for plugin.
 Plugin part of configuration you can find [here](https://github.com/devicehive/devicehive-plugin-core-node#configuration).
 
 **_FILTERS_** - filters for your plugin.
+**_LOGGER_** - logger configuration.
 
-Example:
+Examples:
 
     "FILTERS":{
         "notifications": true,
         "commands": false,
         "command_updates": false,
         "names": "blockchain-record"
+    }
+
+    "LOGGER":{
+        "level": 0, // 0 - info + error, 1 - error
+        "filePath": "./dhe-log.txt"
     }
 
 <a name="Ethereum.config"></a>
@@ -72,10 +65,20 @@ You can find configuration in `./src/ethereum-node/config.json`
 * **_ACCOUNT_PASSWORD_** - ethereum account password <br />
 * **_GAS_LIMIT_** - maximum gas limit which can be used by device <br />
 * **_TIME_PERIOD_** - time period in minutes, every `TIME_PERIOD` minutes gas limit will be updated <br />
-* **_CONTRACT_ADDRESS_** - contract's address <br />
+* **_CONTRACT_ADDRESS_** - contract's address, which plugin will use <br />
 * **_CREATE_NEW_CONTRACT_** - set it to true, if you want to create new contract <br />
 * **_ALLOWED_METHODS_** - methods, which can be used by device <br />
 
+<a name="Message.example">
+
+# Message example
+    {
+        "method": "increase",
+        "args": {
+            "amount": 1
+        },
+        "options": {}
+    }
 
 <a name="Message.model"></a>
 

@@ -1,6 +1,7 @@
 const { DeviceHivePlugin } = require(`devicehive-plugin-core`);
 const { MessageBuilder, MessageUtils } = require(`devicehive-proxy-message`);
 const PluginEthereumUtils = require('./utils/PluginEthereumUtils')
+const log = require('./utils/Logger');
 
 const MessageParams = require('./entities/message/MessageParams');
 
@@ -87,9 +88,12 @@ class PluginService extends DeviceHivePlugin {
         const msgParams = new MessageParams(params);
 
         if (PluginEthereumUtils.checkMethodIsAllowed(msgParams)) {
-            this._contract.sendTransaction(msgParams).catch(err => { throw new Error(err); });
+            this._contract.sendTransaction(msgParams).then(transactionObject => {
+                log.info(`Transaction has been passed successfully, hash: ${transactionObject.transactionHash}`);
+            })
+            .catch(err => log.error(err));
         } else {
-            throw new Error('Method is forbidden');
+            log.error('Method is forbidden');
         }
     }
 
