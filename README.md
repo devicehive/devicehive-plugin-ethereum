@@ -26,7 +26,9 @@ Add plugin topic and access token. Also add user and password for [devicehive ad
 3. Run `npm i`
 4. Run `npm start`
 5. Send [message](#Message.model) from device. See example [here](#Message.example).
-6. Wait for plugin receives the message and sends transaction to blockchain. Logger will notify you about results.
+6. Wait for plugin receives the message and sends transaction to blockchain. 
+
+Logger will notify you about results. You will see message `Transaction has been passed successfully, hash: ${transactionHash}`.
 
 # Configuration
 
@@ -72,6 +74,8 @@ You can find configuration in `./src/ethereum-node/config.json`
 <a name="Message.example">
 
 # Message example
+Message name: `blockchain-record`
+Parameters:
     {
         "method": "increase",
         "args": {
