@@ -16,13 +16,16 @@ deviceHiveService.init().then(() => {
     return deviceHiveService.getPluginByTopic(pluginConfig.PLUGIN_TOPIC);
 }).then(plugin => {
 
-    const configFilters = new PluginFilters(pluginConfig.FILTERS);
-
-    if (!configFilters.equals(plugin.filter) || plugin.parameters.updateToConfig(ethereumConfig)) {
+    if (pluginConfig.PLUGIN_PROPS.OVERRIDE || plugin.parameters.updateToConfig(ethereumConfig)){
         plugin.setStatus(PluginEntity.STATUSES.DISABLED);
-        plugin.filter.setFiltersFromConfig(pluginConfig.FILTERS);
+
+        if (pluginConfig.PLUGIN_PROPS.OVERRIDE){
+            plugin.filter.setFiltersFromConfig(pluginConfig.PLUGIN_PROPS.FILTERS);
+        }
+
         return deviceHiveService.updatePlugin(plugin);
     }
+
     return plugin;
 
 }).then(plugin => {

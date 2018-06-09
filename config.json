@@ -13,11 +13,14 @@
     "AUTO_SUBSCRIPTION_ON_START": true,
     "SUBSCRIPTION_GROUP": "",
 
-    "FILTERS":{
-        "notifications": true,
-        "commands": false,
-        "command_updates": false,
-        "names": "blockchain-record"
+    "PLUGIN_PROPS":{
+        "OVERRIDE": false,
+        "FILTERS":{
+            "notifications": true,
+            "commands": false,
+            "command_updates": false,
+            "names": "blockchain-record"
+        }
     },
     "LOGGER":{
         "level": 0,

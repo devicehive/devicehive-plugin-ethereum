@@ -9,7 +9,7 @@
     "GAS_LIMIT": 1000000000,
     "TIME_PERIOD": 60,
     "CONTRACT_ADDRESS": "",
-    "CREATE_NEW_CONTRACT": false,
+    "OVERRIDE_CONTRACT": false,
     "ALLOWED_METHODS": [
         {
             "name": "increase",
