@@ -9,7 +9,7 @@
   "author": "Grigoriy A.",
   "license": "Apache-2.0",
   "dependencies": {
-    "devicehive": "^2.0.3",
+    "devicehive": "^2.0.4",
     "devicehive-plugin-core": "^1.1.4",
     "devicehive-proxy-message": "^1.0.11",
     "fast-deep-equal": "^2.0.1",

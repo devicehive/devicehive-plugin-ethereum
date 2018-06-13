@@ -75,7 +75,7 @@ You can find configuration in `./src/ethereum-node/config.json`
 * **_OVERRIDE_CONTRACT_** - set it to true, if you want to create new contract <br />
 * **_ALLOWED_METHODS_** - methods, which can be used by device <br />
 
-#Plugin parameters
+# Plugin parameters
 
 After successfull creation of the contract plugin's parameters will be overwritten.<br />
 They will store ethereum node url, contract's address, allowed methods and initial transaction's hash.

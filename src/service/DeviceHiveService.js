@@ -9,6 +9,8 @@ class DeviceHiveService {
         this._httpDeviceHive = new DeviceHive({
             login: config.USER_LOGIN,
             password: config.USER_PASSWORD,
+            accessToken: config.USER_ACCESS_TOKEN,
+            refreshToken: config.USER_REFRESH_TOKEN,
             mainServiceURL: config.DEVICE_HIVE_MAIN_SERVICE_API_URL,
             authServiceURL: config.DEVICE_HIVE_AUTH_SERVICE_API_URL,
             pluginServiceURL: config.DEVICE_HIVE_MAIN_SERVICE_API_URL
