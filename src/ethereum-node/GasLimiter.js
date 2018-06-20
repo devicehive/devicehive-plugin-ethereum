@@ -1,4 +1,4 @@
-const ethereumConfig = require ('./config.json');
+const ethereumConfig = require ('../../ethereum-config.json');
 
 class GasLimiter {
     constructor(gasLimit, timePeriod) {

@@ -1,4 +1,4 @@
-const config = require('../ethereum-node/config.json');
+const config = require('../../ethereum-config.json');
 const Utils = require('./Utils');
 
 class PluginEthereumUtils {
