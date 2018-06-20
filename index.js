@@ -2,7 +2,7 @@ const { DeviceHivePlugin } = require(`devicehive-plugin-core`);
 
 const log = require('./src/utils/Logger');
 const pluginConfig = require('./config/index');
-const ethereumConfig = require('./src/ethereum-node/config.json');
+const ethereumConfig = require('./ethereum-config.json');
 const EthereumAccount = require('./src/ethereum-node/EthereumAccount');
 const PluginContract = require('./src/ethereum-node/PluginContract');
 const PluginEthereumService = require('./src/PluginEthereumService');

@@ -17,7 +17,7 @@ Add ethereum url, account's address and account's password to config file *(path
 
 ## Specify plugin configuration
 In [plugin configuration](#Plugin.config) there are already [playground](https://playground.devicehive.com) urls, however you can run [devicehive](https://github.com/devicehive/devicehive-docker) locally and write your own.
-Add plugin topic and access token. Also add user and password for [devicehive admin panel](https://github.com/devicehive/devicehive-admin-panel).
+Add plugin topic and access token. Also add user access token, which you can copy from playground.
 
 # Simple start
 
@@ -38,6 +38,7 @@ Logger will notify you about results. You will see message `Transaction has been
 
 You can find plugin configuration in `./config.json`
 Plugin part of configuration you can find [here](https://github.com/devicehive/devicehive-plugin-core-node#configuration).
+Also plugin authentication process and options are described [here](https://github.com/devicehive/devicehive-plugin-core-node/blob/master/README.md#plugin-authentication).
 
 **_PLUGIN_PROPS_** - plugin's properties. There are only filters at the moment.
 **_PLUGIN_PROPS.OVERRIDE_** - set it to true and plugin's filters will be updated according to config.
@@ -62,7 +63,7 @@ Examples:
 
 ## Ethereum smart contract
 
-You can find configuration in `./src/ethereum-node/config.json`
+You can find configuration in `./ethereum-config.json`
 
 * **_CONTRACT_PATH_** - path to your smart contract, <br />
 * **_ETHEREUM_URL_** - url to ethereum node, <br />
