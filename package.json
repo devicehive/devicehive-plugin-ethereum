@@ -1,0 +1,20 @@
+{
+  "name": "devicehive-plugin-ethereum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "author": "Grigoriy A.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "devicehive": "^2.0.4",
+    "devicehive-plugin-core": "^1.1.4",
+    "devicehive-proxy-message": "^1.0.11",
+    "fast-deep-equal": "^2.0.1",
+    "json-evn-configurator": "^1.0.6",
+    "solc": "^0.4.24",
+    "web3": "^1.0.0-beta.34"
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "DEVICE_HIVE_PLUGIN_WS_ENDPOINT": "ws://playground.devicehive.com/plugin/proxy",
+    "DEVICE_HIVE_AUTH_SERVICE_API_URL": "http://playground.devicehive.com/auth/rest",
+    "DEVICE_HIVE_MAIN_SERVICE_API_URL": "http://playground.devicehive.com/api/rest",
+    "PLUGIN_TOPIC": "",
+    "PLUGIN_TOKEN_LIFE_TIME_MIN": 60,
+    "USER_LOGIN": "",
+    "USER_PASSWORD": "",
+    "USER_ACCESS_TOKEN": "",
+    "USER_REFRESH_TOKEN": "",
+    "PLUGIN_ACCESS_TOKEN": "",
+    "PLUGIN_REFRESH_TOKEN": "",
+    "AUTO_SUBSCRIPTION_ON_START": true,
+    "SUBSCRIPTION_GROUP": "",
+
+    "PLUGIN_PROPS":{
+        "OVERRIDE": false,
+        "FILTERS":{
+            "notifications": true,
+            "commands": false,
+            "command_updates": false,
+            "names": "blockchain-record"
+        }
+    },
+    "LOGGER":{
+        "level": 0,
+        "filePath":"./dhe-log.txt"
+    }
+}

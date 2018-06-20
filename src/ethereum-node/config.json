@@ -1,0 +1,31 @@
+{
+    "CONTRACT_PATH": "example/contracts/counter.sol",
+    "ETHEREUM_URL": "http://localhost:8545/",
+    "CONTRACT_INITIAL_ARGS": [
+        0
+    ],
+    "ACCOUNT_ADDRESS": "",
+    "ACCOUNT_PASSWORD": "",
+    "GAS_LIMIT": 1000000000,
+    "TIME_PERIOD": 60,
+    "CONTRACT_ADDRESS": "",
+    "OVERRIDE_CONTRACT": false,
+    "ALLOWED_METHODS": [
+        {
+            "name": "increase",
+            "args": []
+        },
+        {
+            "name": "increase",
+            "args": [
+                "amount"
+            ]
+        },
+        {
+            "name": "setCount",
+            "args": [
+                "_count"
+            ]
+        }
+    ]
+}
